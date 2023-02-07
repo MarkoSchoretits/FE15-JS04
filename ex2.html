@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- input fields for fname, lname, age, department and submit -->
+    <input type="text" name="fname" id="fname-input" placeholder="fname">
+    <input type="text" name="lname" id="lname-input" placeholder="lname">
+    <input type="text" name="age" id="age-input" placeholder="age">
+
+    <select name="department" id="department-selection">
+        <option value="Accounting">Accounting</option>
+        <option value="IT">IT</option>
+        <option value="People and Culture">People and Culture</option>
+        <option value="Sales">Sales</option>
+    </select> 
+
+    <input type="submit" id="submit-btn">
+
+
+    <!-- output div -->
+    <div id="credentials-output"></div>
+
+    <script>
+
+        function buildText(){
+
+            // read value of <input> and pass to variable
+            let fname = document.getElementById("fname-input").value;
+            let lname = document.getElementById("lname-input").value;
+            let age = document.getElementById("age-input").value;
+            let department = document.getElementById("department-selection").value;
+
+            // concatenate variables
+            let credentials = (`
+                ${department}: 
+                <span id="fname-span">${fname}</span> 
+                <span id="lname-span">${lname}</span>, age 
+                <span id="age-span">${age}</span>`
+            );
+
+            // output concatenated credentials
+            document.getElementById("credentials-output").innerHTML = `${credentials} <br>`;
+
+            // set colors for fname
+            if (fname.length > 4){
+                document.getElementById("fname-span").style.color = ("green");
+            }
+            else {
+                document.getElementById("fname-span").style.color = ("red");
+            }
+
+            // set colors for lname
+            if (lname.length > 4){
+                document.getElementById("lname-span").style.color = ("green");
+            }
+            else {
+                document.getElementById("lname-span").style.color = ("red");
+            }
+/*
+            // set colors for age
+            if (age > 17){
+                document.getElementById("age-span").style.color = ("green");
+            }
+            else {
+                document.getElementById("age-span").style.color = ("red");
+            }
+*/
+            // set colors for age - alternative code
+            let ageColor = "red";
+            if (age > 17){
+                ageColor = "green";
+            }
+            document.getElementById("age-span").style.color = (ageColor);
+
+            // set background color according to department
+            let deptColor = "white";
+            if (department == "Accounting"){
+                deptColor = "gray";
+            }
+            if (department == "IT"){
+                deptColor = "black";
+            }
+            if (department == "People and Culture"){
+                deptColor = "pink";
+            }
+            if (department == "Sales"){
+                deptColor = "darkgreen";
+            }
+            document.getElementById("credentials-output").style.backgroundColor = (deptColor);
+        }
+
+        // call function "buildText" if "click" triggered
+        document.getElementById("submit-btn").addEventListener("click", buildText);
+
+    </script>
+</body>
+</html>
