@@ -8,6 +8,7 @@
     <style>
         #container {
             text-align: center;
+            min-height: 100vh;
         }
 
         #circle {
@@ -16,7 +17,6 @@
             width: 200px;
             height: 200px;
             background-color: red;
-            border: 3px solid green;
         }
     </style>
 
@@ -29,11 +29,34 @@
 
         <div id="circle"></div>
 
-        <p id="description">description</p>
+        <p id="description">You're outside the circle.</p>
     </div>
 
     <script>
-    
+        // TRIGGER TEXT DESCRIPTION: functions definded first, following the ancient logic from turbo pascal
+        function hoverCircle(){
+            document.getElementById("description").innerHTML = "You are OVER the circle now.";
+        }
+        function notHoverCircle(){
+            document.getElementById("description").innerHTML = "Now you are OUTSIDE the circle.";
+        }
+
+        document.getElementById("circle").addEventListener("mouseover", hoverCircle);
+        document.getElementById("circle").addEventListener("mouseout", notHoverCircle);
+
+        // CHANGE COLOR: functions nested inside the event listener, so arguments can be passed to the function
+        document.getElementById("circle").addEventListener("click", function(){
+            document.getElementById("circle").style.backgroundColor = "black";
+        })
+        document.getElementById("circle").addEventListener("dblclick", function(){
+            document.getElementById("circle").style.backgroundColor = "green";
+        })
+
+        // RESET COLOR:
+            document.getElementById("container").addEventListener("click", function(){
+                document.getElementById("circle").style.backgroundColor = "red";
+            })
+
     </script>
 </body>
 </html>
